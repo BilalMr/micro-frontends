@@ -26,9 +26,11 @@ jobs:
       - run: npm install
       - run: npm run build
 
-      # Deploy to AWS, using aws-cli
-
+      # Deploy to AWS, using aws-cli which gives us programatic access to AWS
+      # Get access to the cli we use the next property
       - uses: shinyinc/action-aws-cli@v1.2
+      # Then we use the cli to run a command
+      # aws to reach to the s3 feature inside the cli and then sync the dist directory that was created with an s3 bucket
       - run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest
         env:
           AWS_ACCESS_KEY_ID: ${{  secrets.AWS_ACCESS_KEY_ID }}
