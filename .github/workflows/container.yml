@@ -1,24 +1,32 @@
 name: deploy-container
 
+# On property designates when we're going to run this workflow or what events are we watching for
 on:
+  # We are going to watch for push event only on the branch master
   push:
     branches:
       - master
+    # paths: we'll only run this workflow when we make a change specifically to the container folder
     paths:
       - 'packages/container/**'
-
+# This is going to set the execusion environment to inside of our container directory, running npm install, npm build
 defaults:
   run:
     working-directory: packages/container
 
 jobs:
+  # build is going to build and deploy our project
   build:
+    # ubuntu-latest is one of the virtual machine created by github
     runs-on: ubuntu-latest
-
+    # steps is where the commands that we want to run
     steps:
+      # First step is to checkout the code we've witten in the virtual machine
       - uses: actions/checkout@v2
       - run: npm install
       - run: npm run build
+
+      # Deploy to AWS, using aws-cli
 
       - uses: shinyinc/action-aws-cli@v1.2
       - run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest
