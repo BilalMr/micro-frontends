@@ -1,9 +1,9 @@
 name: deploy-container
 
-# On property designates when we're going to run this workflow or what events are we watching for
+# On property designates when we want to run this workflow or what events are we watching for
 on:
-  # We are going to watch for push event only on the branch master
   push:
+    # We are going to watch for push event only on the branch master
     branches:
       - master
     # paths: we'll only run this workflow when we make a change specifically to the container folder
@@ -22,9 +22,12 @@ jobs:
     # steps is where the commands that we want to run
     steps:
       # First step is to checkout the code we've witten in the virtual machine
+      # Second is installing dependencies and create a production build using webpack
       - uses: actions/checkout@v2
       - run: npm install
       - run: npm run build
+        env:
+          PRODUCTION_DOMAIN: ${{ secrets.PRODUCTION_DOMAIN }}
 
       # Deploy to AWS, using aws-cli which gives us programatic access to AWS
       # Get access to the cli we use the next property
