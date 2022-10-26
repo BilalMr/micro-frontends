@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   module: {
     rules: [
-      // here we define a loader
+      // Here we define a loader
       // The goal of a loader is to tell webpack to process some different files as we start to import them into our project
       // The first loader we're going to wire up is babel,
       // babel is going to be in charge of processing all of our code from the ES20, ES15... and into into es5 code
