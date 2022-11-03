@@ -5,7 +5,7 @@ const { merge } = require('webpack-merge');
 
 const prodConfig = {
   mode: 'production',
-  ouput: {
+  output: {
     filename: '[name].[contenthash].js',
     publicPath: '/auth/latest/',
   },
