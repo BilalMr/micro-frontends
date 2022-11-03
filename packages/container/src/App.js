@@ -7,6 +7,7 @@ import {
 import Header from './components/Header';
 import Progress from './components/Progress';
 
+// Lazy loading
 const MarketingLazy = lazy(() => import('./components/MarketingApp'));
 const AuthLazy = lazy(() => import('./components/AuthApp'));
 
